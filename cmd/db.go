@@ -20,6 +20,58 @@ func dbConnect() {
 	CheckError(err)
 }
 
+func dbInit() {
+	go func() {
+		dbConnect()
+		defer db.Close()
+		_, err := db.Exec(`
+		DROP TABLE IF EXISTS public.transactions;
+		DROP SEQUENCE IF EXISTS public.id_sequence;
+		`)
+		CheckError(err)
+
+		_, err = db.Exec(`
+		SET statement_timeout = 0;
+		SET lock_timeout = 0;
+		SET idle_in_transaction_session_timeout = 0;
+		SET client_encoding = 'UTF8';
+		SET standard_conforming_strings = on;
+		SELECT pg_catalog.set_config('search_path', '', false);
+		SET check_function_bodies = false;
+		SET xmloption = content;
+		SET client_min_messages = warning;
+		SET row_security = off;
+
+		CREATE SEQUENCE public.id_sequence
+			START WITH 1
+			INCREMENT BY 1
+			NO MINVALUE
+			NO MAXVALUE
+			CACHE 1;
+
+		ALTER TABLE public.id_sequence OWNER TO Constanta;
+		
+		SET default_tablespace = '';
+		
+		CREATE TABLE public.transactions (
+			id bigint DEFAULT nextval('public.id_sequence'::regclass) NOT NULL,
+			userid bigint,
+			useremail character varying(50),
+			amount real,
+			currency character(3),
+			initdate character varying,
+			moddate character varying,
+			status character varying(7)
+		);
+		
+		ALTER TABLE public.transactions OWNER TO Constanta;
+		
+		ALTER TABLE ONLY public.transactions
+			ADD CONSTRAINT transactions_pkey PRIMARY KEY (id);`)
+		CheckError(err)
+	}()
+}
+
 // Сохранение транзакции в базу данных
 func SaveToDB(transaction *Transaction) int64 {
 	c1 := make(chan int64)

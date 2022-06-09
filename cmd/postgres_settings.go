@@ -1,9 +1,9 @@
 package main
 
 const (
-	host     = "localhost"
+	host     = "postgres"
 	port     = 5432
-	user     = "admin"
-	password = "abrakadabra1"
+	user     = "Constanta"
+	password = "Constanta"
 	dbname   = "Constanta"
 )

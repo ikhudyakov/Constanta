@@ -8,6 +8,8 @@ import (
 )
 
 func main() {
+	dbInit()
+
 	r := mux.NewRouter()
 
 	r.HandleFunc("/transactions/{idOrEmail}", getTransactions).Methods("GET")
