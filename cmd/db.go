@@ -8,14 +8,6 @@ import (
 	_ "github.com/lib/pq"
 )
 
-const (
-	host     = "localhost"
-	port     = 5432
-	user     = "admin"
-	password = "abrakadabra1"
-	dbname   = "Constanta"
-)
-
 var db *sql.DB
 var err error
 
@@ -137,7 +129,7 @@ func UpdateStatusDBByID(id int64, status string) string {
 			CheckError(err)
 		}
 
-		if statusFromBd != FAIL && statusFromBd != SUCCESS {
+		if statusFromBd != FAIL && statusFromBd != SUCCESS && statusFromBd != "" {
 			_, err := db.Exec("update Transactions set status = $1, moddate = $2 where id = $3", status, time.Now().String(), id)
 			CheckError(err)
 			c1 <- "status updated successfully"
