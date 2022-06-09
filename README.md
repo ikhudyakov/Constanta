@@ -5,7 +5,7 @@
 ## 1. Создание платежа
 POST запрос   
 ```sh
-http://localhost:8001/transactions
+http://{host}:{port}/transactions
 ```
 body:
 ```sh
@@ -19,20 +19,20 @@ body:
 ## 2. Получение списка платежей пользователя по его ID или email
 GET запрос 
 ```sh  
-http://localhost:8001/transactions/{userId}
-http://localhost:8001/transactions/{email}
+http://{host}:{port}/transactions/{userId}
+http://{host}:{port}/transactions/{email}
 ```
 
 ## 3. Проверка статуса платежа по ID
 GET запрос
 ```sh
-http://localhost:8001/transactions/status/{id}
+http://{host}:{port}/transactions/status/{id}
 ```
 
 ## 4. Изменение статуса платежа
 PUT запрос
 ```sh 
-http://localhost:8001/transactions/status/{id}
+http://{host}:{port}/transactions/status/{id}
 ```
 body:
 ```sh
@@ -43,5 +43,5 @@ body:
 ## 5. Удаление платежа
 DELETE запрос 
 ```sh
-http://localhost:8001/transactions/{id}
+http://{host}:{port}/transactions/{id}
 ```
