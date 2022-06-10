@@ -1,6 +1,8 @@
 # Constanta
  test task for Constanta
 
+> host: localhost
+> port: 8001
 
 ## 1. Создание платежа
 POST запрос   

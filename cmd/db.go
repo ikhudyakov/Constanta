@@ -49,7 +49,7 @@ func dbInit() {
 			NO MAXVALUE
 			CACHE 1;
 
-		ALTER TABLE public.id_sequence OWNER TO Constanta;
+		ALTER TABLE public.id_sequence OWNER TO constanta;
 		
 		SET default_tablespace = '';
 		
@@ -64,7 +64,7 @@ func dbInit() {
 			status character varying(7)
 		);
 		
-		ALTER TABLE public.transactions OWNER TO Constanta;
+		ALTER TABLE public.transactions OWNER TO constanta;
 		
 		ALTER TABLE ONLY public.transactions
 			ADD CONSTRAINT transactions_pkey PRIMARY KEY (id);`)
