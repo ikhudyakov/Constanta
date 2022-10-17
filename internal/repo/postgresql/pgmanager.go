@@ -81,18 +81,20 @@ func (m *PGmanager) GetTransactionByID(id int64) (repo.Transaction, error) {
 	}
 	defer rows.Close()
 
-	err = rows.Scan(
-		&transaction.ID,
-		&transaction.UserId,
-		&transaction.UserEmail,
-		&transaction.Amount,
-		&transaction.Currency,
-		&transaction.InitDate,
-		&transaction.ModDate,
-		&transaction.Status)
+	for rows.Next() {
+		err = rows.Scan(
+			&transaction.ID,
+			&transaction.UserId,
+			&transaction.UserEmail,
+			&transaction.Amount,
+			&transaction.Currency,
+			&transaction.InitDate,
+			&transaction.ModDate,
+			&transaction.Status)
 
-	if err != nil {
-		return transaction, err
+		if err != nil {
+			return transaction, err
+		}
 	}
 	return transaction, sql.ErrConnDone
 }
@@ -106,9 +108,11 @@ func (m *PGmanager) UpdateTransactionStatusByID(id int64, status string) (string
 	}
 	defer rows.Close()
 
-	err = rows.Scan(&statusFromBd)
-	if err != nil {
-		return result, err
+	for rows.Next() {
+		err = rows.Scan(&statusFromBd)
+		if err != nil {
+			return result, err
+		}
 	}
 
 	if statusFromBd != repo.FAIL && statusFromBd != repo.SUCCESS && statusFromBd != "" {
@@ -131,9 +135,11 @@ func (m *PGmanager) DeleteTransactionByID(id int64) (string, error) {
 	}
 	defer rows.Close()
 
-	err = rows.Scan(&statusFromBd)
-	if err != nil {
-		return result, err
+	for rows.Next() {
+		err = rows.Scan(&statusFromBd)
+		if err != nil {
+			return result, err
+		}
 	}
 
 	if statusFromBd == "" {
