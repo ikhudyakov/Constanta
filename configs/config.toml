@@ -1,0 +1,7 @@
+Host = "db"
+Postgresqlport = 5432
+User = "postgres"
+Password = "postgres"
+DBname = "postgres"
+Port = ":8001"
+ConnectionType = "postgres"

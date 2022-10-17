@@ -1,4 +1,4 @@
-package main
+package repo
 
 type Transaction struct {
 	ID        int64   `json:"id"`

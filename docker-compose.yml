@@ -1,18 +1,17 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  postgres:
-    container_name: postgres
+  db:
+    container_name: db
     image: postgres:latest
     environment:
-      POSTGRES_USER: constanta
-      POSTGRES_PASSWORD: constanta
-      POSTGRES_DB: constanta
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
     ports:
       - "5432:5432"
-    volumes: 
-      - dbdata:/var/lib/postgresql/data
-
+    volumes:
+       - dbdata:/var/lib/postgresql/data
   go:
     container_name: go
     ports:
@@ -20,7 +19,7 @@ services:
     build:
       context: .
     depends_on:
-      - "postgres"
+      - "db"
 
 volumes:
   dbdata:

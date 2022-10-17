@@ -1,8 +1,11 @@
 FROM golang:1.18
-WORKDIR /home/ilei/Downloads/Constanta/
-COPY . .
-COPY /cmd .
-RUN go get -u github.com/lib/pq
-RUN go get -u github.com/gorilla/mux
-RUN go build -o main .
-CMD ["./main"]
+
+RUN go version
+ENV GOPATH=/
+
+COPY ./ ./
+
+RUN go mod download
+RUN go build -o paymentservice ./cmd
+
+CMD ["./paymentservice"]

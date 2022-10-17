@@ -1,5 +1,4 @@
-# Constanta
- test task for Constanta
+# Эмулятор платежного сервиса
 
 > host: localhost
 > port: 8001
