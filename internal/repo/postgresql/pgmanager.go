@@ -96,7 +96,7 @@ func (m *PGmanager) GetTransactionByID(id int64) (repo.Transaction, error) {
 			return transaction, err
 		}
 	}
-	return transaction, sql.ErrConnDone
+	return transaction, err
 }
 
 // Обновление статуса транзакции в базе данных по ее ID
