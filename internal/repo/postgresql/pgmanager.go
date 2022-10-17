@@ -121,6 +121,7 @@ func (m *PGmanager) UpdateTransactionStatusByID(id int64, status string) (string
 			return result, err
 		}
 		result = "status updated successfully"
+		return result, err
 	}
 	result = "status update error"
 	return result, err
